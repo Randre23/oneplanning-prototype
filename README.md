@@ -2,6 +2,8 @@
 
 Prototipo independiente para explorar la planificación de un equipo. Implementación nueva con personas y asignaciones ficticias; no contiene código exportado de Apps Script ni información del equipo original.
 
+[Abrir prototipo](https://randre23.github.io/oneplanning-prototype/)
+
 ## Ejecutar
 
 Requiere Node.js 24 o posterior. No hay dependencias de npm que instalar.
