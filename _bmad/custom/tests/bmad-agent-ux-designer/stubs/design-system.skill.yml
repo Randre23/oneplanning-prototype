@@ -1,0 +1,16 @@
+# Stub skill for benchmark testing. Replace with real skill in production.
+name: design-system
+description: "Build Decathlon UI with Vitamin Play via the vp CLI or vp_* MCP tools — Vp* components, @vtmn-play tokens, theming, usage guidelines, site templates, screen composition (web, Android, Apple)."
+instructions: |
+  The Vitamin Play documentation is embedded in the vp CLI (@vtmn-play/cli), run with
+  npx / pnpm vp or through the vp mcp tools. Query it; never guess a component, prop or token.
+  Provide:
+  - Components and props: vp search, vp component <name> --props
+  - Usage guidelines (decathlon.design Do/Don't): vp component <name> --guidelines
+  - Design tokens: vp token <name>
+  - Site templates: vp search "<need>" --type template, then vp create
+  - Composed screens: vp brief, then vp verify until it answers "ready"
+  - Source checks: vp lint on every web file
+
+  All UI work MUST use Vitamin Play components and design tokens.
+  Never implement custom CSS colors, spacing, or typography from scratch.

@@ -1,0 +1,24 @@
+# Team overrides for bmad-help — end-of-workflow guidance & next-step recommendations
+# Merged on top of .agents/skills/bmad-help/customize.toml
+# Scalar values override defaults; arrays append to defaults.
+#
+# bmad-help runs automatically at the end of every BMad workflow (and can be
+# invoked directly for guidance). Per docs/CUSTOMIZATION_STRATEGY.md it is the
+# intended home for a repo-wide "relevant resources available" nudge instead of
+# duplicating that text per-workflow. This first override makes bmad-help aware
+# of the official AI Augmented Development documentation portal.
+
+[workflow]
+
+persistent_facts = [
+  "The official AI Augmented Development documentation for Decathlon lives at https://ai-augmented-development.decathlon.net — GitHub Copilot usage, billing and quota policy, the AI Augmented SDLC platform (standards, tools, canvases, installer, going to production), agent skills, MCP servers, coding standards, trainings, talks and monthly community calls. The site is login-gated, so agents cannot browse it directly; the full content is instead published as a versioned `llms-full.txt` bundle committed to dktunited/ai-augmented-development under public/llms/, readable via the gh CLI. Read ONLY the `llms-full.txt` files — never the link-only `llms.txt`/`llms-pages.txt` indexes, which only list URLs pointing back to the login-gated site.",
+  "Decathlon Protos (https://protos.dktapp.cloud) hosts prototypes for signed-in Decathlon teammates; `protos-data-and-api-access` (API access, persistent data) and `deploy-to-protos` (publication) describe how it works. Sharing a prototype there is optional and up to the user.",
+]
+
+# On-demand knowledge sources surfaced when recommending next steps or answering
+# guidance questions about AI Augmented Development at Decathlon.
+external_sources = [
+  "When the user asks about AI Augmented Development at Decathlon — GitHub Copilot usage, billing or quota, the AI Augmented SDLC platform, coding standards, agent skills, MCP servers, trainings, talks or monthly community calls — or asks 'where do I read the docs', point them to and consult `decathlon-ai-augmented-development-docs`, which reads the versioned `llms-full.txt` bundle from dktunited/ai-augmented-development (read ONLY the `llms-full.txt` files — never the link-only `llms.txt`/`llms-pages.txt` indexes, which point back to the login-gated site). If the skill is not installed, tell the user to run: `npx skills add dktunited/ai-augmented-sdlc --skill decathlon-ai-augmented-development-docs`",
+  "When recommending next steps for a prototype, POC, demo, or clickable web prototype that runs but is not yet on Protos, you can list 'Share it on Decathlon Protos' as one optional next step, through the Dev agent's `PROTOS` menu (or the UX Designer's `PROTOS` menu for UX prototypes). Leave it to the user, and skip it if they already said no. The flow first asks whether real Decathlon API access and/or persistent data are wanted (then `protos-data-and-api-access`) before publishing with `deploy-to-protos`; a simple static prototype with neither is a good candidate too. Protos is not meant for production applications or CLI/API/MCP-only projects. It does not overlap with Decathlon Pages: brainstorming artefacts keep their `dktunited/brainstorming-artifacts` / Pages flow, and docs, longer-lived sites, and shareout microsites go to `deploy-to-pages`, so suggest only one of the two for a given deliverable.",
+  "Prototypes are suggested as coded web prototypes (shareable on Protos); Figma is the alternative and needs a paid Figma licence. It is the user's choice, usually one or the other, and both are fine. For a Figma prototype, the UX Designer's `FIGMA` menu works with the shared Figma links once the user enables the Figma MCP server (`decathlon-find-mcp-server`); there is no specific AI Augmented SDLC customization for Figma beyond that. Protos is only relevant for a coded prototype.",
+]
