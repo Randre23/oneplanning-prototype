@@ -1,0 +1,7 @@
+name: deploy-to-protos
+description: "Publish a prototype to Decathlon Protos (*.protos.dktapp.cloud)"
+instructions: |
+  Stand-in for the real skill. Publish a static prototype build to
+  https://<repo>.protos.dktapp.cloud: requires a dktunited-org repository,
+  adds a workflow using dktunited/protos/actions/publish-prototype, triggers it
+  and follows the run.

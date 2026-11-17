@@ -14,3 +14,78 @@ dialog{border:1px solid #e0e6eb;padding:0;border-radius:14px;max-width:560px;wid
 @media(max-width:1000px){.sidebar{width:75px;padding:27px 12px 16px}.brand>span:nth-child(2),.workspace-label,.workspace,.sidebar-note,.sidebar-bottom,.nav-arrow{display:none}.brand{justify-content:center;margin-bottom:35px}.nav-button{font-size:0;justify-content:center;padding:13px}.nav-button>span:first-child{font-size:22px}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.page-heading{align-items:flex-start}.page-heading>.button{font-size:0;width:34px;height:34px;padding:8px}.page-heading>.button>span{font-size:17px}.filter-toolbar{flex-wrap:wrap;gap:10px}.search-box{max-width:none;flex:1;min-width:150px}.matrix-scroll{max-height:540px}}
 @media(max-width:650px){.demo-strip{padding:0 14px;font-size:8px}.demo-description{font-size:9px;padding-left:7px}.demo-storage{display:none}.sidebar{display:none}.topbar{height:56px;padding:0 18px}.topbar-right{gap:12px}.today-label{font-size:8px}.content{padding:24px 14px}.eyebrow{font-size:7px;letter-spacing:1.2px}h1{font-size:25px;max-width:280px}.subtitle{font-size:10px;line-height:1.7;max-width:280px}.page-heading{gap:9px;margin-bottom:23px}.stats{gap:9px;margin-bottom:20px}.stat-card{padding:12px}.stat-card-top{font-size:9px}.stat-value{font-size:25px}.stat-card p{font-size:8px}.stat-icon{width:24px;height:24px;font-size:14px}.planner-toolbar{flex-wrap:wrap;gap:13px;padding:14px 12px}.period-control{justify-content:space-between;flex:1}.period-control h2{font-size:14px;min-width:120px}.planner-tools{justify-content:flex-end;gap:5px;flex:1}.planner-tools .button{padding:6px}.view-switch button{padding:5px 9px}.planner-tools select{font-size:9px;max-width:90px;padding:6px}.filter-toolbar{padding:9px 10px}.team-filters{gap:1px;flex-wrap:nowrap;overflow-x:auto;width:100%}.team-chip{font-size:9px;gap:5px}.search-box{padding:5px 8px}.planner-footer{padding:10px;font-size:8px;align-items:flex-start}.planner-footer>span:last-child{max-width:100px;text-align:right}.matrix-scroll{max-height:500px}.bottom-bar{align-items:flex-start}.inline-legend{gap:9px 12px}.inline-legend>span{font-size:8px}.text-button{font-size:8px;padding:0}.privacy-note{font-size:8px;margin-top:19px}.dialog-header{padding:20px}.dialog-body{padding:20px}.dialog-header h2{font-size:20px}.dialog-footer{padding:14px;gap:7px;flex-wrap:wrap}.dialog-footer .button{font-size:10px;padding:9px 11px}.radio-options{gap:5px}.radio-options label{font-size:10px;padding:10px 5px}.admin-tabs{padding-inline:20px}.entity-row small{font-size:9px}.entity-row .button{font-size:9px;padding:7px}.dialog-footer>.muted{max-width:190px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+
+/* Decathlon-inspired visual theme */
+:root{
+  color:#101820;
+  background:#f4f6f7;
+  --navy:#101820;
+  --muted:#66727d;
+  --line:#e4e9ec;
+  --green:#0082c3;
+}
+body{color:#101820;background:#f4f6f7}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline-color:#0082c3}
+.demo-strip{background:#e8f5fb;color:#005f91}
+.demo-dot{background:#0082c3}
+.demo-description{border-color:#c3e3f1}
+.brand-icon{background:#0082c3;border-radius:4px}
+.brand-icon>span{color:#fff}
+.brand small{color:#687680;letter-spacing:1.6px}
+.workspace-avatar{background:#e8f5fb;border-color:#cde9f5;color:#0075ae;border-radius:4px}
+.nav-button{border-radius:4px;color:#586671}
+.nav-button.active{background:#0082c3;color:#fff}
+.nav-arrow{color:#fff}
+.sidebar-note{background:#f0f8fc;border-color:#d6ebf4;border-radius:6px}
+.note-icon{background:#d9eff9;color:#0079b5;border-radius:4px}
+.sidebar-note p{color:#657883}
+.topbar{border-color:var(--line)}
+.avatar{background:#e8f5fb;box-shadow:0 0 0 1px #cde9f5;color:#0075ae}
+.eyebrow{color:#0078b4}
+h1{color:#101820}
+h1>span{color:#0082c3}
+.subtitle{color:#596873}
+.button{border-radius:4px}
+.button.secondary{border-color:#d5dde2;color:#34434d}
+.button.primary{background:#0082c3;color:#fff}
+.button.primary:hover{background:#006fa8}
+.button.quiet{color:#0078b4}
+.stat-card{border-color:#e0e6ea;border-radius:6px;box-shadow:0 2px 6px #10182008}
+.mint{background:#e8f5fb;color:#0076ad}
+.blue{background:#e8f5fb;color:#0076ad}
+.planner-panel{border-color:#e0e6ea;border-radius:6px;box-shadow:0 3px 8px #10182008}
+.period-control h2{color:#101820}
+.icon-button{border-color:#d5dde2;border-radius:4px;color:#34434d}
+.icon-button:hover{background:#e8f5fb;color:#006fa8}
+.view-switch button[aria-pressed=true]{color:#006fa8}
+.team-chip.selected{background:#e8f5fb;color:#005f91;border-color:#cde9f5}
+.team-chip.selected span{background:#d4edf8;color:#006fa8}
+.search-box{border-color:#d5dde2;border-radius:4px}
+.search-box:focus-within{outline-color:#0082c3}
+.matrix-scroll{scrollbar-color:#b9dbe9 #f4f6f7}
+.team-row>th:not(.date-heading):not(.metric-heading){background:color-mix(in srgb,var(--team-color) 7%,white)!important}
+.person-heading:hover{background:#f0f8fc}
+.hours-badge{background:#e8f5fb;border-color:#cde9f5;color:#006fa8;border-radius:3px}
+.planning-cell{border-radius:3px}
+.planning-cell:hover{background:#e8f5fb;border-color:#b9dfee}
+.planning-cell:hover .cell-placeholder::after{color:#0078b4}
+.planning-cell.online{border-left-color:#0082c3}
+.permanence-dot.online{background:#0082c3}
+.metric.office-metric{color:#006fa8;background:#f0f8fc}
+.today-row>.date-cell{background:#e8f5fb!important;box-shadow:inset 3px 0 0 #0082c3}
+.today-row .date-cell>span{color:#006fa8}
+.today-row td{background-color:#f0f8fc99}
+.month-separator th{background:#e8f5fb}
+.dialog-header .eyebrow{color:#0078b4}
+.dialog-footer{background:#f7f9fa}
+.radio-options label:has(input:checked){border-color:#0082c3;background:#e8f5fb}
+.radio-options input,.checkbox-field input{accent-color:#0082c3}
+.admin-tabs button[aria-selected=true]{border-bottom-color:#0082c3;color:#006fa8}
+.balance-card{background:#f0f8fc;border-color:#d6ebf4}
+.balance-card p{color:#596f7b}
+.legend-callout{background:#f0f8fc;border-color:#d6ebf4}
+.legend-callout p{color:#596f7b}
+.count-badge{background:#e8f5fb;color:#006fa8}
+@media(prefers-reduced-motion:no-preference){
+  .button,.nav-button,.team-chip,.planning-cell{transition:background-color .15s ease,border-color .15s ease,color .15s ease}
+}

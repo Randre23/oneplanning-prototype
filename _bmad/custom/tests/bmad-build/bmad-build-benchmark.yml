@@ -1,0 +1,179 @@
+# Benchmark: bmad-build workflow (Phase 4 implementation loop)
+#
+# BMAD-METHOD 6.11.0 made bmad-build the single official implementation skill;
+# bmad-dev-story is now a forwarding shim under v6-shims/. This benchmark
+# replaces the former bmad-dev-story benchmark and validates
+# _bmad/custom/bmad-build.toml.
+project: bmad-build
+model: copilot/claude-haiku-5.5
+
+# ── Pre-activate hook ─────────────────────────────────────────
+pre_activate:
+  command: >-
+    uv run ${PROJECT_ROOT:-.}/_bmad/scripts/resolve_customization.py
+    --skill ${BUILD_WORKFLOW_SKILL_DIR:-./.agents/skills/bmad-build}
+    --key workflow
+  var: resolved_agent
+
+system_prompt: >-
+  {resolved_agent}
+
+  You are an AI agent helping developers implement user stories.
+  You have access to specialized skills for story execution and validation.
+
+skills:
+  - name: bmad-build-workflow
+    path: ${BUILD_WORKFLOW_SKILL_DIR:-./.agents/skills/bmad-build}/SKILL.md
+
+sub_skills:
+  - name: decathlon-tech-compliance
+    path: ./tests/bmad-build/stubs/decathlon-tech-compliance.skill.yml
+  - name: knowledge-graph-query
+    path: ./tests/bmad-build/stubs/knowledge-graph-query.skill.yml
+  - name: java-tests-tzatziki
+    path: ./tests/bmad-build/stubs/java-tests-tzatziki.skill.yml
+  - name: protos-data-and-api-access
+    path: ./tests/bmad-build/stubs/protos-data-and-api-access.skill.yml
+  - name: deploy-to-protos
+    path: ./tests/bmad-build/stubs/deploy-to-protos.skill.yml
+
+prompts:
+  - id: activation-skill-discovery
+    text: >-
+      Load the build workflow. What scanning mode is used for skill discovery?
+    asserts:
+      - type: response_contains
+        value: "Quick Context Scan"
+
+  - id: activation-compliance-check
+    text: >-
+      Load the build workflow. What SIG domain verification must happen
+      when starting a story?
+    asserts:
+      - type: response_contains
+        value: "decathlon-tech-compliance"
+
+  - id: persistent-web-task-flow
+    text: >-
+      Load the build workflow. What is the WEB TASK FLOW order
+      for web frontend work?
+    asserts:
+      - type: response_contains
+        value: "design-system"
+
+  - id: on-complete-bdd-tests
+    text: >-
+      Load the build workflow. For Java/Spring projects with Tzatziki,
+      what is generated on story completion?
+    asserts:
+      - type: response_contains
+        value: "java-tests-tzatziki"
+
+  - id: activation-asset-kg
+    text: >-
+      Load the build workflow. When the work involves a named Decathlon
+      product, service, or API, what must be loaded before implementing?
+    asserts:
+      - type: response_contains
+        value: "knowledge-graph-query"
+
+  - id: activation-api-discovery
+    text: >-
+      Load the build workflow. If the work implies calling an internal
+      capability without naming a specific API or endpoint, what must happen
+      before writing integration code?
+    asserts:
+      - type: response_contains
+        value: "decathlon-api-discovery"
+
+  - id: persistent-security-requirements
+    text: >-
+      Load the build workflow. Which security artefacts are mandatory
+      completion criteria?
+    asserts:
+      - type: response_contains
+        value: "_specs/security-requirements.md"
+      - type: response_contains
+        value: "_specs/security-verification-checklist.md"
+
+  - id: persistent-tech-radar-hold
+    text: >-
+      Load the build workflow. What happens to a technology classified
+      as HOLD on the Decathlon Tech Radar?
+    asserts:
+      - type: response_contains_ignore_case
+        value: "HOLD"
+      - type: response_contains_ignore_case
+        value: "block"
+
+  - id: review-layer-decathlon-compliance
+    text: >-
+      Load the build workflow. Which review layers run on the diff, and
+      what does the Decathlon-specific one check?
+    asserts:
+      - type: response_contains_ignore_case
+        value: "Decathlon Compliance"
+      - type: response_contains
+        value: "FedID"
+
+  - id: on-complete-protos-offer-consent
+    text: >-
+      Load the build workflow. I just finished building a clickable web
+      prototype. What happens at the end of the build regarding Decathlon
+      Protos, and in which order are the Protos skills used if I accept?
+    asserts:
+      - type: response_contains_ignore_case
+        value: "ask"
+      - type: response_contains
+        value: "protos-data-and-api-access"
+      - type: response_contains
+        value: "deploy-to-protos"
+
+  - id: persistent-protos-follow-skill
+    text: >-
+      Load the build workflow. My prototype targets Decathlon Protos and has a
+      store.yaml. Should I set up FedID authentication with better-auth and
+      call https://api.decathlon.net directly from the browser?
+    asserts:
+      - type: response_contains
+        value: "protos-data-and-api-access"
+      - type: response_contains
+        value: "/api/"
+
+  # ── Proportional workflow & execution guardrails ───────────────────────
+  - id: sizing-light-dependency-bump
+    text: >-
+      Load the build workflow. I want to bump an existing library from 2.3.1
+      to 2.3.2 (patch). Do you run skill discovery and the full compliance sweep?
+    asserts:
+      - type: response_contains
+        value: "Light"
+
+  - id: sizing-not-light-cors
+    text: >-
+      Load the build workflow. One-line change: set CORS allowed origins to "*".
+      Is this a Light change?
+    asserts:
+      - type: response_contains_ignore_case
+        value: "not"
+      - type: response_contains_ignore_case
+        value: "security"
+
+  - id: execution-source-target
+    text: >-
+      Load the build workflow. I'm in a Copilot App worktree on branch
+      `jdoe-fix-scaling` (from develop) and want to apply to staging. The plan
+      shows 84 to add and 19 to destroy for a one-value change. Is it drift?
+    asserts:
+      - type: response_contains_ignore_case
+        value: "source"
+      - type: response_contains_ignore_case
+        value: "target"
+
+  - id: execution-semantic-gates
+    text: >-
+      Load the build workflow. My gate says "deploy only if exactly 5 services
+      change", but only the 1 service I modified changes. Block the deploy?
+    asserts:
+      - type: response_contains_ignore_case
+        value: "scope"

@@ -1,0 +1,9 @@
+name: protos-data-and-api-access
+description: "Protos prototype API proxy and persistent data (store.yaml)"
+instructions: |
+  Stand-in for the real skill. For a prototype hosted on Decathlon Protos:
+  - Protos handles FedID sign-in: no app-level auth, tokens or Authorization headers.
+  - Call Decathlon APIs with relative fetch('/api/...'), never https://api.decathlon.net from the browser.
+  - /api/*, /data/* and /admin/* are owned by the platform.
+  - Persistent data goes through /data/*, declared in a root store.yaml.
+  - No personal or critical data; only user-provided FedID IDs in store.yaml.
